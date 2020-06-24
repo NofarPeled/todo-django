@@ -1,4 +1,4 @@
-import todoService from '../../services/todoService.js';
+import todoService from '../../services/todoService';
 
 export default({
     strict: true,

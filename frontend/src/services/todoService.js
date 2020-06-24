@@ -28,8 +28,6 @@ async function getById(id) {
 
 async function add(todo) {
     try {   
-        console.log(todo, `${TODO_API}/`);
-        
         return await httpService.post(`${TODO_API}/`, todo);
     } catch (err) {
         throw err;

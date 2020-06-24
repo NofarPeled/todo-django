@@ -17,8 +17,18 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'corsheaders',
-    'todo'
+    'todo',
+    'user'
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES':  (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+    # 'DEFAULT_PERMISSION_CLASSES': (
+    #     'rest_framework.permissions.IsAdminUser'
+    # ),
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -43,6 +53,7 @@ CORS_ALLOW_HEADERS = [
     'x-requested-with',
     'access-control-allow-origin',
 ]
+
 
 CORS_ALLOW_CREDENTIALS = True
 

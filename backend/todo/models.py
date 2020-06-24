@@ -1,4 +1,5 @@
 from django.db import models
+from user.models import User
 
 class Todo(models.Model):
     _id = models.AutoField(primary_key = True)
@@ -6,3 +7,4 @@ class Todo(models.Model):
     content = models.TextField()
     created_at = models.DateField()
     complete = models.BooleanField(default = False)
+    owner = models.ForeignKey(User, related_name = 'todo', on_delete = models.CASCADE, null = True)
