@@ -29,7 +29,7 @@ export default {
         title: '',
         content: '',
         created_at: '',
-        complete: false
+        completed: false
       }
     };
   },

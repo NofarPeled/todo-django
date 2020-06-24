@@ -1,6 +1,7 @@
 export default {
     save, 
-    load
+    load,
+    remove
 }
 
 function save(key, value) {
@@ -9,4 +10,8 @@ function save(key, value) {
 
 function load(key) {
     return JSON.parse(localStorage.getItem(key));
+}
+
+function remove(key) {
+    localStorage.removeItem(key);
 }

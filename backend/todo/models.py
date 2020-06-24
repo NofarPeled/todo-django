@@ -6,5 +6,5 @@ class Todo(models.Model):
     title = models.CharField(max_length = 250)
     content = models.TextField()
     created_at = models.DateField()
-    complete = models.BooleanField(default = False)
-    owner = models.ForeignKey(User, related_name = 'todo', on_delete = models.CASCADE, null = True)
+    completed = models.BooleanField(default = False)
+    owner = models.ForeignKey(User, related_name = 'todo', on_delete = models.CASCADE)

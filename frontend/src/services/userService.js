@@ -4,7 +4,8 @@ import localStorageService from './localStorageService';
 export default {
     query,
     signIn,
-    signUp, 
+    signUp,
+    signOut 
 }
 
 const USER_API = 'user';
@@ -14,7 +15,7 @@ async function query() {
     try {
         const oldToken = localStorageService.load(TOKEN_API);
         if (!oldToken) return null;
-        const { user, token } = await httpService.get(`${TOKEN_API}/`, oldToken );
+        const { user, token } = await httpService.get(`${TOKEN_API}/`, oldToken);
         localStorageService.save(TOKEN_API, token);
         return user;
     } catch(err) {
@@ -42,4 +43,7 @@ async function signUp(userCred) {
     };
 };
 
+async function signOut() {
+    localStorageService.remove(TOKEN_API);
+}
 

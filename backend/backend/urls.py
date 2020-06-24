@@ -1,11 +1,13 @@
 from django.contrib import admin
 from django.urls import include,path
-from .routers import router
+from todo.urls import todo_router
+from user.urls import user_router
 from django.views.generic import TemplateView
-
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include(router.urls)),
-    path('', TemplateView.as_view(template_name = 'index.html')),
+    path('api/todo/', include(todo_router.urls)),
+    path('api/auth/', include(user_router.urls)),
+    path('', TemplateView.as_view(template_name = 'index.html'))
 ]
+

@@ -8,6 +8,5 @@ router = routers.DefaultRouter()
 router.register(r'todo', TodoViewSet, basename = 'todo')
 
 # user paths
-router.register(r'user/sign_in', SignUpViewSet, basename='user_sign_in')
-router.register(r'user/sign_up',SignInViewSet, basename='user_sign_up')
-
+router.register(r'user/sign_in',SignInViewSet , basename='user_sign_in')
+router.register(r'user/sign_up',SignUpViewSet, basename='user_sign_up')
