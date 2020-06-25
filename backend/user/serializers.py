@@ -22,13 +22,12 @@ class SignInSerializer(serializers.ModelSerializer):
     def validate(self, data):
         username = data.get("username")
         password = data.get("password")
-        user = User.objects.get(username=username, password=password)
-        #user = authenticate(username=username, password=password)
 
-        if self.model.DoesNotExist:
-           raise serializers.ValidationError({'error': 'A User with This Username and Password is Not Found'})
-
-        return user
+        try :
+            user = User.objects.get(username=username, password=password)
+            return user
+        except User.DoesNotExist:
+            raise serializers.ValidationError({'error': 'A User with This Username and Password is Not Found'})
     
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
