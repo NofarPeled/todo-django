@@ -11,13 +11,13 @@ export default({
         }
     },
     actions: {
-        async signIn({ commit }, { userCred }) {
-            const user = await userService.signIn(userCred);
-            commit({ type: 'setUser', user });
+        async signIn({ commit }, { user }) {
+            const updatedUser = await userService.signIn(user);
+            commit({ type: 'setUser', user : updatedUser });
         }, 
-        async signUp({ commit }, { userCred }) {
-            const user = await userService.signUp(userCred);
-            commit({ type: 'setUser', user });
+        async signUp({ commit }, { user }) {
+            const updatedUser = await userService.signUp(user);
+            commit({ type: 'setUser', user : updatedUser });
         },
         signOut({ commit }) {
             userService.signOut();

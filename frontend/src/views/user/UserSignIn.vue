@@ -24,7 +24,8 @@ export default {
           type: this.isSignInMode ? 'signIn' : 'signUp',
           user
         });
-        this.$router.push('/');
+        //TODO! PUSH ROUTER!
+        //this.$router.push('/');
       } catch (err) {
         //TODO! HANDLE ERROR
         console.log('Got error in user sign in, sign in function: ', err);

@@ -1,8 +1,8 @@
 <template>
   <form class="sign-in-form" @submit="onSubmit">
-    <h2 class="username_error" v-if="err.last_name">{{ err.last_name }}</h2>
+    <h2 class="username_error" v-if="err.username">{{ err.username }}</h2>
     <label for="username" value="User Name" />
-    <input type="text" name="username" v-model="user.last_name" placeholder="Enter User Name" />
+    <input type="text" name="username" v-model="user.username" placeholder="Enter User Name" />
 
     <h2 class="email_error" v-if="err.email">{{ err.email }}</h2>
     <label for="email" value="Email" v-if="!isSignInMode" />
@@ -51,6 +51,11 @@ export default {
   methods: {
     onSubmit(ev) {
       ev.preventDefault();
+      if (this.user.password !== this.user.re_password && !this.isSignInMode) {
+        this.err.password = 'Passwords Must Match!';
+        return;
+      }
+      delete this.user.re_password;
       const userCred = { ...this.user };
       this.$emit('signIn', userCred);
     }

@@ -8,7 +8,7 @@ export default {
     signOut 
 }
 
-const USER_API = 'user';
+const AUTH_API = 'auth';
 const TOKEN_API = 'token';
 
 async function query() {
@@ -25,7 +25,7 @@ async function query() {
 
 async function signIn(userCred) {
     try {   
-        const { user, token } = await httpService.post(`${USER_API}/sign_in/`, userCred);
+        const { user, token } = await httpService.post(`${AUTH_API}/sign_in/`, userCred);
         localStorageService.save(TOKEN_API, token)
         return user;
     } catch(err) {
@@ -35,7 +35,7 @@ async function signIn(userCred) {
 
 async function signUp(userCred) {
     try {
-        const { user, token } = await httpService.post(`${USER_API}/sign_up/`, userCred);
+        const { user, token }  = await httpService.post(`${AUTH_API}/sign_up/`, userCred);        
         localStorageService.save(TOKEN_API, token);
         return user;
     } catch(err) {

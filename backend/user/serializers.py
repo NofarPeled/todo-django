@@ -1,41 +1,47 @@
 from rest_framework import serializers
-from .models import User
+from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 
-#TODO: CHECK ID NEEDED!
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('_id', 'username', 'email', 'password')
-        extra_kwarg = { 'password' : {
-            'write_only' : True
-        }}
+        fields = ('id', 'username', 'email', 'password')
+        extra_kwarg = { 'password' : { 'write_only' : True }}
 
 
 class SignUpSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('_id', 'username', 'email', 'password')
-
-        extra_kwarg = { 'password' : {
-            'write_only' : True
-        }}
+        fields = ('id', 'username', 'email', 'password')
+        extra_kwarg = { 'password' : {'write_only' : True }}
 
     def create_user(self, validated_data):
-        user = User.objects.create_user(validated_data['username'], validated_data['email'], validated_data['password'])
-
+        if not username :
+            raise ValueError('User Name is Must Field')
+        if not email :
+            raise ValueError('Email is a Must Field')
+        if not password : 
+            raise ValueError('Password is a Must Field')
+    
+        user = User.objects.create_user(username=validated_data['username'], email=validated_data['email'], password=validated_data['password'])
+        user.save()
         return user
 
 class SignInSerializer(serializers.ModelSerializer):
+
     class Meta:
         model = User
         fields = ('username', 'password')
 
     def validate(self, data):
-      email = data.get("email", None)
-      password = data.get("password", None)
-      user = authenticate(email=email, password=password)
+        username = data.get("username")
+        password = data.get("password")
 
-      if user is None:
-          raise serializers.ValidationError('A user with this email and password is not found.')
+        user = authenticate(username=username, password=password)
+
+        if user is None:
+           raise serializers.ValidationError({'error': 'A User with This Username and Password is Not Found'})
+
+        return user
+    
 
