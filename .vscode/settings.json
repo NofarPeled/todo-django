@@ -1,0 +1,7 @@
+{
+    "prettier.bracketSpacing": false,
+    "prettier.disableLanguages": [
+        "javascript"
+    ],
+    "git.ignoreLimitWarning": true
+}
