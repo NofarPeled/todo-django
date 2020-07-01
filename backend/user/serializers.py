@@ -6,7 +6,11 @@ class SignUpSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ('id', 'username', 'email', 'password')
-        extra_kwarg = { 'password' : {'write_only' : True }}
+        extra_kwargs = { 
+            'password' : {
+                'write_only' : True 
+            }
+        }
 
     def create_user(self, validated_data):
         user = User.objects.create_user(username=validated_data['username'], email=validated_data['email'], password=validated_data['password'])
@@ -17,7 +21,11 @@ class SignInSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ('username', 'password')
-        extra_kwargs = { 'password' : {'write_only' : True }}
+        extra_kwargs = { 
+            'password' : {
+                'write_only' : True 
+            }
+        }
 
     def validate(self, data):
         username = data.get("username")
@@ -27,11 +35,14 @@ class SignInSerializer(serializers.ModelSerializer):
             user = User.objects.get(username=username, password=password)
             return user
         except User.DoesNotExist:
-            raise serializers.ValidationError({'error': 'A User with This Username and Password is Not Found'})
+            raise serializers.ValidationError({'error': 'A user with this username and password is not found'})
     
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ('id', 'username', 'email', 'password')
-        extra_kwargs = { 'password' : { 'write_only' : True }}
-
+        extra_kwargs = { 
+            'password' : {
+                'write_only' : True 
+            }
+        }

@@ -6,11 +6,13 @@ from .models import Todo
 from .serializers import TodoSerializer
 
 class TodoViewSet(viewsets.ModelViewSet):
-    permission_classes = (permissions.IsAuthenticated, )
+    permission_classes = (permissions.IsAuthenticated,)
+
     serializer_class = TodoSerializer
+    queryset = Todo.objects.all()
 
     def get_queryset(self):
-        return self.request.user.todo.all()
+        return self.queryset.filter(owner = self.request.user)
 
-    def preform_create(self, serializer):
+    def perform_create(self, serializer):
         serializer.save(owner = self.request.user)
