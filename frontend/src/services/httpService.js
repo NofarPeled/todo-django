@@ -1,4 +1,6 @@
 import axios from 'axios';
+import localStorageService from './localStorageService'
+import types from './types'
 
 const BASE_URL =
   process.env.NODE_ENV === 'production'
@@ -6,6 +8,7 @@ const BASE_URL =
     : 'http://127.0.0.1:8000/api/';
 
 axios.defaults.withCredentials = true;
+axios.defaults.headers.common['Authorization'] = _getToken();
 
 async function ajax(endpoint, method = 'get', data = null, query = null) {
   try {
@@ -39,3 +42,9 @@ export default {
     return ajax(endpoint, 'DELETE', data);
   }
 };
+
+function _getToken(){
+  const token = localStorageService.load(types.TOKEN_API)
+  if (token) return `Token ${token}`
+  return null;
+}

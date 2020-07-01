@@ -10,13 +10,9 @@ export default {
     remove
 };
 
-const config = {
-    headers: {}
-}
-
 async function query() {
     try {
-        return await httpService.get(`${types.TODO_API}/`, null, _getConfig());
+        return await httpService.get(`${types.TODO_API}/`);
     } catch (err) {
         throw err;
     };
@@ -24,7 +20,7 @@ async function query() {
 
 async function getById(id) {
     try {  
-        return await httpService.get(`${types.TODO_API}/${id}`,null, _getConfig());
+        return await httpService.get(`${types.TODO_API}/${id}`);
     } catch (err) {
         throw err;
     };
@@ -32,7 +28,7 @@ async function getById(id) {
 
 async function add(todo) {
     try {   
-        return await httpService.post(`${types.TODO_API}/`, todo, _getConfig());
+        return await httpService.post(`${types.TODO_API}/`, todo);
     } catch (err) {
         throw err;
     };
@@ -40,7 +36,7 @@ async function add(todo) {
 
 async function update(todo) {
     try {
-        return await httpService.put(`${types.TODO_API}/${todo._id}/`, todo, _getConfig());
+        return await httpService.put(`${types.TODO_API}/${todo._id}/`, todo);
     } catch (err) {
         throw err;
     };
@@ -48,14 +44,9 @@ async function update(todo) {
 
 async function remove(id) {
     try {
-        await httpService.delete(`${types.TODO_API}/${id}`,null, _getConfig());
+        await httpService.delete(`${types.TODO_API}/${id}`);
     } catch (err) {
         throw err;
     };
 };
 
-function _getConfig(){
-    const token = localStorageService.load(types.TOKEN_API)
-    if (token) config.headers.Authorization = `Token ${token}`
-    return config;
-}

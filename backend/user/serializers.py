@@ -17,7 +17,7 @@ class SignInSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ('username', 'password')
-        extra_kwarg = { 'password' : {'write_only' : True }}
+        extra_kwargs = { 'password' : {'write_only' : True }}
 
     def validate(self, data):
         username = data.get("username")
@@ -33,5 +33,5 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ('id', 'username', 'email', 'password')
-        extra_kwarg = { 'password' : { 'write_only' : True }}
+        extra_kwargs = { 'password' : { 'write_only' : True }}
 
